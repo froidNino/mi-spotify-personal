@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Spotify - Kendrick Lamar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <!-- Contenedor principal que divide la pantalla -->
+    <div class="app-container">
+        
+        <!-- PANEL IZQUIERDO: El Reproductor -->
+        <div class="player-container">
+            <div class="player-header">
+                <h2>REPRODUCIENDO</h2>
+                <h1>Kendrick Essentials</h1>
+            </div>
+            
+            <div class="cover-container">
+                <!-- ID "cover" para poder cambiar la imagen con código -->
+                <img src="imagenes/portada.jpg" alt="Portada" id="cover" class="cover-image">
+            </div>
+
+            <div class="track-info">
+                <h2 id="title">HUMBLE.</h2>
+                <h3 id="artist">Kendrick Lamar</h3>
+            </div>
+
+            <div class="progress-container">
+                <span id="current-time">0:00</span>
+                <input type="range" id="progress-bar" min="0" max="100" value="0">
+                <span id="duration">0:00</span>
+            </div>
+
+            <div class="controls">
+                <button id="prev"><i class="fas fa-backward-step"></i></button>
+                <button id="play" class="play-btn"><i class="fas fa-play" id="play-icon"></i></button>
+                <button id="next"><i class="fas fa-forward-step"></i></button>
+            </div>
+            
+            <audio id="audio" src="musica/cancion1.mp3"></audio>
+        </div>
+
+        <!-- PANEL DERECHO: La Playlist -->
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <h2>BIBLIOTECA</h2>
+                <h1>Tus Pistas</h1>
+            </div>
+            <!-- Aquí el JavaScript inyectará las canciones automáticamente -->
+            <ul id="playlist-list" class="playlist-list">
+            </ul>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
