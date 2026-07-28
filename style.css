@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; 
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
@@ -15,16 +15,19 @@ body {
     min-height: 100vh;
 }
 
-/* Nuevo contenedor gigante para organizar los dos paneles */
+/* UTILIDAD PARA OCULTAR PANTALLAS */
+.hidden {
+    display: none !important;
+}
+
 .app-container {
     display: flex;
-    gap: 40px; /* Espacio entre el reproductor y la lista */
+    gap: 40px;
     width: 90%;
     max-width: 900px;
     align-items: stretch;
 }
 
-/* PANEL IZQUIERDO */
 .player-container {
     background-color: rgba(20, 0, 40, 0.6);
     backdrop-filter: blur(12px);
@@ -36,13 +39,12 @@ body {
     text-align: center;
 }
 
-/* PANEL DERECHO (Nuevo) */
 .playlist-container {
     background-color: rgba(20, 0, 40, 0.4);
     backdrop-filter: blur(12px);
     padding: 30px;
     border-radius: 20px;
-    flex-grow: 1; /* Ocupa el resto del espacio disponible */
+    flex-grow: 1;
     box-shadow: 0 0 25px rgba(138, 43, 226, 0.2);
     border: 1px solid rgba(138, 43, 226, 0.3);
     display: flex;
@@ -55,29 +57,106 @@ body {
     padding-bottom: 15px;
 }
 
-.playlist-header h2, .player-header h2 {
+.playlist-header h2,
+.player-header h2 {
     font-size: 13px;
     letter-spacing: 5px;
-    color: #00ffff; 
+    color: #00ffff;
     margin-bottom: 5px;
     text-transform: uppercase;
 }
 
-.playlist-header h1, .player-header h1 {
+.playlist-header h1,
+.player-header h1 {
     font-size: 22px;
     color: #ffffff;
     text-shadow: 0 0 10px #8a2be2;
 }
 
-/* Estilos de la lista de canciones */
+/* NUEVO: CUADRÍCULA DE CARPETAS */
+.categories-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas */
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.category-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #8a2be2;
+    border-radius: 15px;
+    padding: 30px 10px;
+    font-size: 18px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+}
+
+.category-btn:hover {
+    background-color: rgba(138, 43, 226, 0.3);
+    border-color: #00ffff;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateY(-5px);
+    color: #00ffff;
+}
+
+.category-btn .emoji {
+    font-size: 40px;
+    /* Emojis grandes */
+}
+
+/* NUEVO: BOTÓN DE VOLVER ATRÁS */
+.back-btn {
+    background: transparent;
+    border: none;
+    color: #00ffff;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ffff;
+    transform: translateX(-5px);
+}
+
+/* LISTA DE CANCIONES Y SCROLL */
+#songs-view {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .playlist-list {
     list-style: none;
-    overflow-y: auto; /* Permite hacer scroll si hay muchas canciones */
+    overflow-y: auto;
     max-height: 400px;
     padding-right: 10px;
 }
 
-/* Diseño de cada canción en la lista */
+.playlist-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.playlist-list::-webkit-scrollbar-thumb {
+    background: #8a2be2;
+    border-radius: 10px;
+}
+
 .song-item {
     display: flex;
     align-items: center;
@@ -93,10 +172,9 @@ body {
 .song-item:hover {
     background-color: rgba(138, 43, 226, 0.2);
     border: 1px solid #00ffff;
-    transform: translateX(5px); /* Se mueve un poquito a la derecha al pasar el mouse */
+    transform: translateX(5px);
 }
 
-/* Canción que está sonando actualmente */
 .song-item.active {
     background-color: rgba(0, 255, 255, 0.15);
     border: 1px solid #00ffff;
@@ -114,31 +192,109 @@ body {
     font-size: 12px;
 }
 
-/* Scrollbar personalizado para darle el toque tecnológico */
-.playlist-list::-webkit-scrollbar {
-    width: 8px;
-}
-.playlist-list::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-.playlist-list::-webkit-scrollbar-thumb {
-    background: #8a2be2;
-    border-radius: 10px;
+/* ESTILOS DEL REPRODUCTOR */
+.cover-image {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #8a2be2;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+    margin-bottom: 25px;
 }
 
-/* (El resto de estilos de la portada, barra y botones se mantienen igual) */
-.cover-image {
-    width: 260px; height: 260px; object-fit: cover;
-    border-radius: 15px; border: 2px solid #8a2be2;
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.7); margin-bottom: 25px;
+.track-info h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
-.track-info h2 { font-size: 24px; margin-bottom: 5px; color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
-.track-info h3 { font-size: 14px; color: #00ffff; margin-bottom: 25px; }
-.progress-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; font-size: 13px; color: #e0b3ff; }
-#progress-bar { width: 72%; cursor: pointer; accent-color: #00ffff; filter: drop-shadow(0 0 5px #00ffff); }
-.controls { display: flex; justify-content: center; align-items: center; gap: 30px; }
-button { background: none; border: none; color: #8a2be2; font-size: 22px; cursor: pointer; transition: all 0.3s ease; }
-button:hover { color: #00ffff; text-shadow: 0 0 15px #00ffff; transform: scale(1.1); }
-.play-btn { background-color: transparent; color: #00ffff; width: 70px; height: 70px; border-radius: 50%; border: 2px solid #00ffff; display: flex; justify-content: center; align-items: center; font-size: 26px; box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 15px rgba(0, 255, 255, 0.2); }
-.play-btn:hover { background-color: rgba(0, 255, 255, 0.15); box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.4); transform: scale(1.08); }
+
+.track-info h3 {
+    font-size: 14px;
+    color: #00ffff;
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 13px;
+    color: #e0b3ff;
+}
+
+#progress-bar {
+    width: 72%;
+    cursor: pointer;
+    accent-color: #00ffff;
+    filter: drop-shadow(0 0 5px #00ffff);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.play-btn {
+    background-color: transparent;
+    color: #00ffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.play-btn:hover {
+    background-color: rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: scale(1.08);
+}
+
+/* DISCO DE VINILO */
+.vinyl-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.vinyl-record {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(#111, #111 4px, #222 5px, #222 6px);
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 2s linear infinite;
+    animation-play-state: paused;
+}
+
+.vinyl-record::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background-color: #8a2be2;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -9,10 +9,9 @@
 </head>
 <body>
     
-    <!-- Contenedor principal que divide la pantalla -->
     <div class="app-container">
         
-        <!-- PANEL IZQUIERDO: El Reproductor -->
+        <!-- PANEL IZQUIERDO -->
         <div class="player-container">
             <div class="player-header">
                 <h2>REPRODUCIENDO</h2>
@@ -20,7 +19,6 @@
             </div>
             
             <div class="cover-container">
-                <!-- ID "cover" para poder cambiar la imagen con código -->
                 <img src="imagenes/portada.jpg" alt="Portada" id="cover" class="cover-image">
             </div>
 
@@ -41,18 +39,46 @@
                 <button id="next"><i class="fas fa-forward-step"></i></button>
             </div>
             
-            <audio id="audio" src="musica/cancion1.mp3"></audio>
+            <!-- EL DISCO DE VINILO -->
+            <div class="vinyl-container">
+                <div class="vinyl-record" id="vinyl"></div>
+            </div>
+            
+            <audio id="audio" src=""></audio>
         </div>
 
-        <!-- PANEL DERECHO: La Playlist -->
+        <!-- PANEL DERECHO -->
         <div class="playlist-container">
             <div class="playlist-header">
                 <h2>BIBLIOTECA</h2>
-                <h1>Tus Pistas</h1>
+                <h1 id="playlist-title">Tus Carpetas</h1>
             </div>
-            <!-- Aquí el JavaScript inyectará las canciones automáticamente -->
-            <ul id="playlist-list" class="playlist-list">
-            </ul>
+            
+            <!-- VISTA 1: Los botones de carpetas -->
+            <div id="categories-view" class="categories-grid">
+                <button class="category-btn" data-genre="rap">
+                    <span class="emoji">🎤</span> RAP
+                </button>
+                <button class="category-btn" data-genre="rave">
+                    <span class="emoji">🪩</span> RAVE
+                </button>
+                <button class="category-btn" data-genre="reggaeton">
+                    <span class="emoji">🔥</span> REGGAETÓN
+                </button>
+                <button class="category-btn" data-genre="pop">
+                    <span class="emoji">🎸</span> POP
+                </button>
+            </div>
+
+            <!-- VISTA 2: La lista de canciones (Oculta al inicio) -->
+            <div id="songs-view" class="hidden">
+                <button id="back-btn" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Volver atrás
+                </button>
+                
+                <!-- Aquí aparecerán las canciones de la carpeta seleccionada -->
+                <ul id="current-playlist" class="playlist-list"></ul>
+            </div>
         </div>
 
     </div>
